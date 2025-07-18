@@ -1,32 +1,44 @@
-/*
+// Original issue: "5" is a string. JavaScript automatically converts it to a number when using the '-' operator,
+// but it's clearer and safer to convert it explicitly.
+let result = Number("5") - 2; 
+console.log("The result is: " + result); // Output: 3
 
-Part 1: Debugging Challenge
-The JavaScript code below contains intentional bugs related to type conversion.
-Please do the following:
-  - Run the script to observe unexpected outputs.
-  - Debug and fix the errors using explicit type conversion methods like  Number() ,  String() , or    Boolean()  where necessary.
-  - Annotate the code with comments explaining why the fix works.
-
-Part 2: Write Your Own Examples
-Write their own code that demonstrates:
-  - One example of implicit type conversion.
-  - One example of explicit type conversion.
-
-  *We encourage you to:
-Include at least one edge case, like NaN, undefined, or null .
-Use console.log() to clearly show the before-and-after type conversions.
-
-*/
-
-
-let result = "5" - 2;
-console.log("The result is: " + result);
-
-let isValid = Boolean("false");
+// Original issue: Boolean("false") returns true because any non-empty string is truthy in JavaScript.
+// Instead of converting to Boolean, we directly check the string value.
+let isValid = ("false" === "true"); 
 if (isValid) {
     console.log("This is valid!");
+} else {
+    console.log("Not valid."); // Output: Not valid.
 }
 
+// Original issue: "25" is a string, so adding 5 to it results in string concatenation: "255".
+// We use Number() to convert it to a proper number before addition.
 let age = "25";
-let totalAge = age + 5;
-console.log("Total Age: " + totalAge);
+let totalAge = Number(age) + 5;
+console.log("Total Age: " + totalAge); // Output: Total Age: 30
+
+
+
+//  Implicit Type Conversion - automatic
+let number = 10;
+let stringMessage = "The number is " + number; 
+console.log(stringMessage); // Output: The number is 10
+
+//  Explicit Type Conversion 
+let userInput = "123";
+let numericValue = Number(userInput); 
+console.log(numericValue); // Output: 123
+console.log(typeof numericValue); // Output: number
+
+// Edge Case: NaN
+let wrongInput = "hello";
+let failedConversion = Number(wrongInput);
+console.log(failedConversion); // Output: NaN
+console.log(isNaN(failedConversion)); // Output: true
+
+// Edge Case: null
+let nullValue = null;
+let convertedNull = Number(nullValue); 
+console.log(convertedNull); // Output: 0
+console.log(typeof convertedNull); // Output: number
